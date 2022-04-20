@@ -1,64 +1,58 @@
 package SuperFatorial;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class CalculateSuperFatorial {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        long startTime = System.nanoTime();
 
-        int choose = 1;
+        int choose = 2;
 
         switch (choose){
             case 1:
-               superFatorialWithLooping();
-               break;
+                superFatorialWithLooping();
+                long totalTime = System.nanoTime() - startTime;
+                System.out.println("Demorou " + totalTime + " milissegundos");
+                break;
             case 2:
                 superFatorialWithDinamicProgramming();
+                totalTime = System.nanoTime() - startTime;
+                System.out.println("Demorou " + totalTime + " milissegundos");
                 break;
         }
-
     }
 
     static void superFatorialWithLooping() {
 
         double finalResult = 1;
-        long start = System.currentTimeMillis();
+        double number = 25;
 
-        int number = 4;
-
-        for (int j = number; j >=1; j--) {
-            for (int i = j; i >= 1; i--) {
+        for (double j = number; j >=1; j--) {
+            for (double i = j; i >= 1; i--) {
                 finalResult *= i;
             }
         }
 
         System.out.println("SuperFatorial de: " + number);
         System.out.println(finalResult);
-        System.out.println("Tempo Total: " + (System.currentTimeMillis() - start));
-        System.out.println("Meg used= "+(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/(1000*1000)+"M");
     }
 
     static void superFatorialWithDinamicProgramming() {
 
-        int dataSize = 1024 * 1024;
-        long tempoInicio = System.currentTimeMillis();
-        Runtime runtime = Runtime.getRuntime();
-
-        int number = 4;
-
-        int result = conclusion(number);
+        double number = 25;
+        double result = conclusion(number);
 
         System.out.println("SuperFatorial de: " + number);
         System.out.println("Result: " + result);
-        System.out.println("Tempo Total: "+(System.currentTimeMillis()-tempoInicio));
-        System.out.println("Meg used= "+(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/(1000*1000)+"M");
     }
 
-    private static int conclusion(int number){
+    private static double conclusion(double number){
         return superFatorial(number, number);
     }
 
-    private static int superFatorial(int number, int number2){
+    private static double superFatorial(double number, double number2){
         if(number2 == 1){
             return 1;
         }
